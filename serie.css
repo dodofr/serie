@@ -1,4 +1,304 @@
-img{
+
+body{
+    background: rgb(36,0,0);
+background: linear-gradient(90deg, rgba(36,0,0,1) 0%, rgba(121,9,9,1) 41%, rgba(173,17,17,1) 100%);
+color: white;
+}
+
+/*Partie gridTitre et boutons*/
+
+.gridTitre {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4em;
+    margin: 0 40px;
+
+}
+
+.gridTitre h1 {
+    grid-area: 1/1/2/4;
+    text-align: center;
+    
+    font-size: 2.5em;
+}
+
+.gridTitre p {
+    grid-area: 2/1/3/3;
+    color: lightcoral;
+    font-size: 1.5em;
+
+
+}
+
+.gridTitre .divInput {
+    grid-area: 3/2/4/3;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.gridTitre #rechercheInput {
+
+    border-style: solid;
+    padding: 6px;
+    font-size: 16px;
+    border-width: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(42, 42, 42, .75);
+    text-shadow: 0px 0px 0px rgba(42, 42, 42, .75);
+    background-color: #e01212;
+    border-color: #700202;
+    border-radius: 18px;
+    width: 300px;
+
+}
+
+.gridTitre .divBtnPopulaire {
+    grid-area: 3/1/4/2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.gridTitre .divBtnOnAir {
+    grid-area: 3/3/4/4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    box-shadow: 3px 4px 0px 0px #8a2a21;
+    background: linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+    background-color: #c62d1f;
+    border-radius: 18px;
+    border: 1px solid #d02718;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 19px;
+    padding: 7px 25px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #810e05;
+    height: 50px;
+    width: 200px;
+
+
+}
+
+button:hover {
+    background: linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+    background-color: #f24437;
+}
+
+button:active {
+    position: relative;
+    top: 1px;
+}
+
+
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 40px 20px 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8em;
+
+}
+
+.grid div {
+    border: 1px solid red;
+    box-shadow: 0px 0px 21px 12px #ff0000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 550px;
+    width: 400px;
+    margin: 10px 10px;
+}
+
+.grid div button {
+    height: 20px;
     width: 100px;
-    height: 100px;
+    font-size: 0.5em;
+    margin-bottom: 10px;
+}
+
+.grid div p {
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+
+}
+
+.grid .divPresentationSerie {
+    grid-area: 1/1/2/3;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    color: rgb(253, 253, 253, 1);
+    z-index: 10;
+}
+
+.grid .divPresentationFiltre {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.727);
+    z-index: -1;
+}
+@media screen and (max-width: 600px){
+    body{
+        padding: 0 20px;
+    }
+    
+    .gridTitre {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:1em;
+        margin: 10px 5px
+       
+    
+    }
+    
+    .gridTitre h1 {
+       
+        
+        font-size: 2.5em;
+    }
+    
+    .gridTitre p {
+       
+        font-size: 1.5em;
+    
+    
+    }
+    
+    .gridTitre .divInput {
+       
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .gridTitre #rechercheInput {
+    
+        
+        width: 200px;
+    
+    }
+    
+    .gridTitre .divBtnPopulaire {
+       
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+    }
+    
+    .gridTitre .divBtnOnAir {
+       
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    button {
+      
+        height: 50px;
+        width: 200px;
+    
+    
+    }
+    
+    
+    
+    
+    img {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    
+    .grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+        
+    
+    }
+    
+    .grid div {
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 550px;
+        width: 300px;
+        
+    }
+    
+    .grid div button {
+        height: 20px;
+        width: 100px;
+        font-size: 0.5em;
+      
+    }
+    
+    .grid div p {
+    
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        /* number of lines to show */
+        -webkit-box-orient: vertical;
+    
+    }
+    
+    .grid .divPresentationSerie {
+       
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        color: rgb(253, 253, 253, 1);
+        z-index: 10;
+    }
+    
+    .grid .divPresentationFiltre {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.727);
+        z-index: -1;
+    }
 }

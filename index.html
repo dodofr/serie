@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="serie.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    
-    <input id="rechercheInput" placeholder="Chercher une série" />
-    <button id="seriePopulaire">série Populaire</button>
-    <button id="serieOnAir">Série Sortie cette semaine</button>
-    <div class="grid"></div>
-    
 
-    <script src="serie.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="serie.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="gridTitre">
+
+    <h1>DodoSérie</h1>
+    <p>Entrer dans le monde magique des séries</p>
+    <div class="divInput">
+    <input id="rechercheInput" placeholder="Chercher une série" />
+  </div>
+    <div class="divBtnPopulaire">
+      <button id="seriePopulaire">Série Populaire</button>
+    </div>
+    <div class="divBtnOnAir">
+    <button id="serieOnAir">Série Sortie cette semaine</button>
+  </div>
+  </div>
+  <div class="flex" id="divFlex">
+  <div class="grid"></div>
+</div>
+
+  <script src="serie.js"></script>
+</body>
+
 </html>
