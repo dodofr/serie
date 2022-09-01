@@ -585,8 +585,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         )
                           .then((reponse) => reponse.json())
                           .then((data) => {
-                           
-                           window.open("https://www.youtube.com/watch?v=" + `${data.results[getRandomInt(data.results.length)].key}`)
+                           let urlSaisonDescription = "https://www.youtube.com/watch?v=" + `${data.results[getRandomInt(data.results.length)].key}`
+                           window.open(urlSaisonDescription)
                             })
                           })
                   
@@ -635,8 +635,8 @@ document.addEventListener("DOMContentLoaded", () => {
                           )
                             .then((reponse) => reponse.json())
                             .then((data) => {
-                               
-                             window.open("https://www.youtube.com/watch?v=" + `${data.results[getRandomInt(data.results.length)].key}`)
+                               let url = "https://www.youtube.com/watch?v=" + `${data.results[getRandomInt(data.results.length)].key}`
+                             window.open(url)
                               })
                             })
 
