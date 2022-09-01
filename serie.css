@@ -117,6 +117,7 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8em;
+    text-align: justify;
 
 }
 
@@ -149,7 +150,18 @@ img {
     -webkit-box-orient: vertical;
 
 }
+.grid div .descriptionSansLimiteText{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+    padding: 0px 5px;
+    
+}
 
+/* permet de mettre une opacité a une image en background */
 .grid .divPresentationSerie {
     grid-area: 1/1/2/3;
     width: 100%;
@@ -167,6 +179,7 @@ img {
     background-color: rgba(0, 0, 0, 0.727);
     z-index: -1;
 }
+/*fin de la technique de l'opacité */
 #retour {
     height: 30px;
         width: 100px;
@@ -177,12 +190,15 @@ img {
         
 }
 #acceuil{
-    height: 30px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
     position: fixed;
     top: 0;
     right: 0;
     z-index: 100;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 0px 0px;
 }
 @media screen and (max-width: 600px){
     body{
@@ -312,6 +328,8 @@ img {
         position: relative;
         color: rgb(253, 253, 253, 1);
         z-index: 10;
+        padding: 0px 5px; /* comportement a surveiller */
+        
     }
     
     .grid .divPresentationFiltre {
