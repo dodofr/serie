@@ -167,6 +167,23 @@ img {
     background-color: rgba(0, 0, 0, 0.727);
     z-index: -1;
 }
+#retour {
+    height: 30px;
+        width: 100px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        
+}
+#acceuil{
+    height: 30px;
+    width: 100px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+}
 @media screen and (max-width: 600px){
     body{
         padding: 0 20px;
@@ -304,4 +321,6 @@ img {
         background-color: rgba(0, 0, 0, 0.727);
         z-index: -1;
     }
+    
 }
+
