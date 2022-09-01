@@ -1,13 +1,25 @@
 //recuperer la valeur de l'input
 
 let inputRecherche = document.getElementById("rechercheInput");
+// variable 
 let grid = document.querySelector(".grid");
 let seriePopulaire = document.getElementById("seriePopulaire")
 let serieOnAir = document.getElementById("serieOnAir")
+let acceuil = document.getElementById("acceuil")
+
+// bouton retour a l'acceuil
+
+acceuil.addEventListener("click", () =>{
+  location.reload()
+})
+
+// cacher le bouton retour car il ne fonctionne qu'avec des valeurs de l'input 
+document.getElementById('retour').style.visibility = 'hidden'
 
 //serie on air
 
 serieOnAir.addEventListener("click", () => {
+  document.getElementById('retour').style.visibility = 'hidden'
   grid.innerHTML = "";
   fetch(
     `https://api.themoviedb.org/3/tv/on_the_air?api_key=3341d636ea5e718cbe535387f5416379&language=fr&page=1`
@@ -141,6 +153,7 @@ serieOnAir.addEventListener("click", () => {
 
 // serie populaire
 seriePopulaire.addEventListener("click", () => {
+  document.getElementById('retour').style.visibility = 'hidden'
   grid.innerHTML = "";
   fetch(
     `https://api.themoviedb.org/3/tv/popular?api_key=3341d636ea5e718cbe535387f5416379&language=fr&page=1`
@@ -287,6 +300,7 @@ inputRecherche.addEventListener("keyup", () => {
 
 // fonction fetch avec la creation
 function fetchEtCreationContenu() {
+  document.getElementById('retour').style.visibility = 'visible'
   let input = inputRecherche.value;
   //recuperation de la recherche pour retour en arriere
   tabInputrecherche.push(input)
