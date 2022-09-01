@@ -35,6 +35,7 @@ color: white;
     display: flex;
     justify-content: center;
     text-align: center;
+    
 }
 
 .gridTitre #rechercheInput {
@@ -49,6 +50,8 @@ color: white;
     border-color: #700202;
     border-radius: 18px;
     width: 300px;
+    
+    
 
 }
 
@@ -224,9 +227,9 @@ img {
     
     button {
       
-        height: 50px;
+        height: 40px;
         width: 200px;
-    
+        font-size: 0.8em;
     
     }
     
