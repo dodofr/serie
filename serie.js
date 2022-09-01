@@ -534,30 +534,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 let imageSerie;
                 let saisonDescription;
                 let saisonNb;
-               
-                // tab avec liste ba
+               let btnSaisonDescription = document.createElement("button")
+               btnSaisonDescription.setAttribute("id", `${data.id}`) // bouton de la ba dans la premiere pastille
 
-                //faire un bouton voir la bande annonce
-
-                // let saisonBA;
-                // let tabBADeLaSerie = [];
-                // for (let j = 0; j < data.seasons.length; j++) {
-                //  fetch(
-                //       `https://api.themoviedb.org/3/tv/${data.id}/season/${j}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=fr`
-                //     )
-                //       .then((reponse) => reponse.json())
-                //       .then((data) => {
-                //          tabBADeLaSerie.push(data.results[0].key)
-                         
-                //         })
-                // }
-                // saisonBA.innerHTML = tabBADeLaSerie[i]
-                    
-                // console.log(tabBADeLaSerie)
-
-                // divSaison.appendChild(saisonBA)
-                // saisonBA = document.createElement("p");
-                // fin tentative
                 nomSerie.innerHTML = data.name;
                 genre.innerHTML =
                   "Genres : " +
@@ -586,6 +565,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   " Last épisode : " +
                   data.last_episode_to_air.episode_number;
                 description.innerHTML = data.overview;
+                btnSaisonDescription.innerHTML = "Ba en US"
 
                 div.appendChild(nomSerie);
                 div.appendChild(enCour);
@@ -593,10 +573,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 div.appendChild(production);
                 div.appendChild(description);
                 div.appendChild(divFiltre);
+                div.appendChild(btnSaisonDescription)
                 grid.appendChild(div);
-                
+                // bouton ba description
+                let btnSaisonBa = document.getElementById(`${data.id}`)
                   
-                
+                btnSaisonBa.addEventListener("click", (e) => {
+                  
+                  fetch(
+                          `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                        )
+                          .then((reponse) => reponse.json())
+                          .then((data) => {
+                           
+                           window.open("https://www.youtube.com/watch?v=" + `${data.results[getRandomInt(data.results.length)].key}`)
+                            })
+                          })
+                  
+                //bouton ba description fin 
+
                 for (let i = 0; i < data.seasons.length; i++) {
                   divSaison = document.createElement("div");
                   saisonsName = document.createElement("p");
@@ -607,10 +602,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     "descriptionSansLimiteText"
                   );
                   saisonNb = document.createElement("p");
+                  saisonBouton = document.createElement("button")//boutonBA
+                  saisonBouton.setAttribute("class", `${e.target.id}`)//boutonBA
+                  saisonBouton.setAttribute("id", `${i}`)//boutonBA
                   
-                        
-                  
-
                   saisonsName.innerHTML = data.seasons[i].name;
                   imageSerie.src =
                     "https://image.tmdb.org/t/p/original" +
@@ -622,18 +617,37 @@ document.addEventListener("DOMContentLoaded", () => {
                     " / " +
                     " Nbs d'épisodes : " +
                     data.seasons[i].episode_count;
-                    
+                    saisonBouton.innerHTML ="voir la BA"
                     
                   divSaison.appendChild(saisonsName);
                   divSaison.appendChild(imageSerie);
                   divSaison.appendChild(saisonDescription);
                   divSaison.appendChild(saisonNb);
-                  
+                  divSaison.appendChild(saisonBouton) // boutonBA
                   grid.appendChild(divSaison);
+                  
+                  let btnSaisonBa = document.getElementById(`${i}`)
+                  
+                  btnSaisonBa.addEventListener("click", (event) => {
+                    
+                    fetch(
+                            `https://api.themoviedb.org/3/tv/${event.target.classList.value}/season/${event.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=fr`
+                          )
+                            .then((reponse) => reponse.json())
+                            .then((data) => {
+                               
+                             window.open("https://www.youtube.com/watch?v=" + `${data.results[getRandomInt(data.results.length)].key}`)
+                              })
+                            })
+
+
                 } //fin du for
               });
           }); // fin du bouton
         } // fin du for
       }); // fin du fetch
   } // fin de la function
-});
+})
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
