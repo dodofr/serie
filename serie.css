@@ -134,9 +134,9 @@ img {
 }
 
 .grid div button {
-    height: 20px;
-    width: 100px;
-    font-size: 0.5em;
+    height: 50px;
+    width: 220px;
+    font-size: 0.8em;
     margin-bottom: 10px;
 }
 
@@ -200,6 +200,17 @@ img {
     text-align: center;
     padding: 0px 0px;
 }
+.lienBtnSaisonDescription {
+    color: #FFFFFF;
+    font-size: 12px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+ }
+ .lienBtnSaisonDescription:hover {
+    color: #FFFFFF;
+    background-color: #DE999C;
+ }
 @media screen and (max-width: 600px){
     body{
         padding: 0 20px;
@@ -297,14 +308,14 @@ img {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        height: 550px;
+        height: 600px;   /*a verif*/
         width: 300px;
         
     }
     
     .grid div button {
-        height: 20px;
-        width: 100px;
+        height: 30px;
+        width: 200px;
         font-size: 0.5em;
       
     }
