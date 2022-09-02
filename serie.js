@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   data.last_episode_to_air.episode_number;
                 description.innerHTML = data.overview;
                 btnSaisonDescription.innerHTML =
-                  "Générer aléatoirement une video en Anglais";
+                  "Générer aléatoirement une video en FR/EN";
 
                 div.appendChild(nomSerie);
                 div.appendChild(enCour);
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 btnSaisonBa.addEventListener("click", (e) => {
                   fetch(
-                    `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                    `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=fr`
                   )
                     .then((reponse) => reponse.json())
                     .then((data) => {
@@ -152,10 +152,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         "https://www.youtube.com/watch?v=" +
                         `${data.results[random].key}`;
                     })
-                    .catch(
-                      (err) =>
-                        (lienBtnSaison.innerHTML =
-                          "Aucune bande annonce disponible")
+                    .catch((err) =>
+                      fetch(
+                        `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                      )
+                        .then((reponse) => reponse.json())
+                        .then((data) => {
+                          let random = getRandomInt(data.results.length);
+                          lienBtnSaisonDescription.innerHTML =
+                            "&#128073; " +
+                            `${data.results[random].name}` +
+                            " &#128072;";
+
+                          lienBtnSaisonDescription.href =
+                            "https://www.youtube.com/watch?v=" +
+                            `${data.results[random].key}`;
+                        })
+                        .catch(
+                          (err) =>
+                            (lienBtnSaison.innerHTML =
+                              "Aucune bande annonce disponible")
+                        )
                     );
                 });
 
@@ -171,7 +188,10 @@ document.addEventListener("DOMContentLoaded", () => {
                   saisonNb = document.createElement("p");
                   saisonBouton = document.createElement("button"); //boutonBA
                   saisonBouton.setAttribute("class", `${e.target.id}`); //boutonBA
-                  saisonBouton.setAttribute("id", `${i}`); //boutonBA
+                  saisonBouton.setAttribute(
+                    "id",
+                    `${data.seasons[i].season_number}`
+                  ); //boutonBA
                   let lienBtnSaison = document.createElement("a");
 
                   saisonsName.innerHTML = data.seasons[i].name;
@@ -185,7 +205,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     " / " +
                     " Nbs d'épisodes : " +
                     data.seasons[i].episode_count;
-                  saisonBouton.innerHTML = "Générer aléatoirement une Ba en FR";
+                  saisonBouton.innerHTML =
+                    "Générer aléatoirement une Ba en FR/EN";
 
                   divSaison.appendChild(saisonsName);
                   divSaison.appendChild(imageSerie);
@@ -195,7 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
                   divSaison.appendChild(lienBtnSaison);
                   grid.appendChild(divSaison);
 
-                  let btnSaisonBa = document.getElementById(`${i}`);
+                  let btnSaisonBa = document.getElementById(
+                    `${data.seasons[i].season_number}`
+                  );
 
                   btnSaisonBa.addEventListener("click", (event) => {
                     fetch(
@@ -219,10 +242,34 @@ document.addEventListener("DOMContentLoaded", () => {
                           "https://www.youtube.com/watch?v=" +
                           `${data.results[random].key}`;
                       })
-                      .catch(
-                        (err) =>
-                          (lienBtnSaison.innerHTML =
-                            "Aucune bande annonce disponible" + " &#128556;")
+                      .catch((err) =>
+                        fetch(
+                          `https://api.themoviedb.org/3/tv/${event.target.classList.value}/season/${event.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                        )
+                          .then((reponse) => reponse.json())
+                          .then((data) => {
+                            lienBtnSaison.setAttribute("target", "_blank");
+                            lienBtnSaison.setAttribute(
+                              "class",
+                              "lienBtnSaisonDescription"
+                            );
+                            let random = getRandomInt(data.results.length);
+
+                            lienBtnSaison.innerHTML =
+                              "&#128073; " +
+                              `${data.results[random].name}` +
+                              " &#128072;";
+
+                            lienBtnSaison.href =
+                              "https://www.youtube.com/watch?v=" +
+                              `${data.results[random].key}`;
+                          })
+                          .catch(
+                            (err) =>
+                              (lienBtnSaison.innerHTML =
+                                "Aucune bande annonce disponible" +
+                                " &#128556;")
+                          )
                       );
                   });
                 } //fin du for
@@ -333,7 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   data.last_episode_to_air.episode_number;
                 description.innerHTML = data.overview;
                 btnSaisonDescription.innerHTML =
-                  "Générer aléatoirement une video en Anglais";
+                  "Générer aléatoirement une video en FR/EN";
 
                 div.appendChild(nomSerie);
                 div.appendChild(enCour);
@@ -350,7 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 btnSaisonBa.addEventListener("click", (e) => {
                   fetch(
-                    `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                    `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=fr`
                   )
                     .then((reponse) => reponse.json())
                     .then((data) => {
@@ -364,10 +411,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         "https://www.youtube.com/watch?v=" +
                         `${data.results[random].key}`;
                     })
-                    .catch(
-                      (err) =>
-                        (lienBtnSaison.innerHTML =
-                          "Aucune bande annonce disponible")
+                    .catch((err) =>
+                      fetch(
+                        `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                      )
+                        .then((reponse) => reponse.json())
+                        .then((data) => {
+                          let random = getRandomInt(data.results.length);
+                          lienBtnSaisonDescription.innerHTML =
+                            "&#128073; " +
+                            `${data.results[random].name}` +
+                            " &#128072;";
+
+                          lienBtnSaisonDescription.href =
+                            "https://www.youtube.com/watch?v=" +
+                            `${data.results[random].key}`;
+                        })
+                        .catch(
+                          (err) =>
+                            (lienBtnSaison.innerHTML =
+                              "Aucune bande annonce disponible")
+                        )
                     );
                 });
 
@@ -383,7 +447,10 @@ document.addEventListener("DOMContentLoaded", () => {
                   saisonNb = document.createElement("p");
                   saisonBouton = document.createElement("button"); //boutonBA
                   saisonBouton.setAttribute("class", `${e.target.id}`); //boutonBA
-                  saisonBouton.setAttribute("id", `${i}`); //boutonBA
+                  saisonBouton.setAttribute(
+                    "id",
+                    `${data.seasons[i].season_number}`
+                  ); //boutonBA
                   let lienBtnSaison = document.createElement("a");
 
                   saisonsName.innerHTML = data.seasons[i].name;
@@ -397,7 +464,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     " / " +
                     " Nbs d'épisodes : " +
                     data.seasons[i].episode_count;
-                  saisonBouton.innerHTML = "Générer aléatoirement une Ba en FR";
+                  saisonBouton.innerHTML =
+                    "Générer aléatoirement une Ba en FR/EN";
 
                   divSaison.appendChild(saisonsName);
                   divSaison.appendChild(imageSerie);
@@ -407,7 +475,9 @@ document.addEventListener("DOMContentLoaded", () => {
                   divSaison.appendChild(lienBtnSaison);
                   grid.appendChild(divSaison);
 
-                  let btnSaisonBa = document.getElementById(`${i}`);
+                  let btnSaisonBa = document.getElementById(
+                    `${data.seasons[i].season_number}`
+                  );
 
                   btnSaisonBa.addEventListener("click", (event) => {
                     fetch(
@@ -431,10 +501,34 @@ document.addEventListener("DOMContentLoaded", () => {
                           "https://www.youtube.com/watch?v=" +
                           `${data.results[random].key}`;
                       })
-                      .catch(
-                        (err) =>
-                          (lienBtnSaison.innerHTML =
-                            "Aucune bande annonce disponible" + " &#128556;")
+                      .catch((err) =>
+                        fetch(
+                          `https://api.themoviedb.org/3/tv/${event.target.classList.value}/season/${event.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                        )
+                          .then((reponse) => reponse.json())
+                          .then((data) => {
+                            lienBtnSaison.setAttribute("target", "_blank");
+                            lienBtnSaison.setAttribute(
+                              "class",
+                              "lienBtnSaisonDescription"
+                            );
+                            let random = getRandomInt(data.results.length);
+
+                            lienBtnSaison.innerHTML =
+                              "&#128073; " +
+                              `${data.results[random].name}` +
+                              " &#128072;";
+
+                            lienBtnSaison.href =
+                              "https://www.youtube.com/watch?v=" +
+                              `${data.results[random].key}`;
+                          })
+                          .catch(
+                            (err) =>
+                              (lienBtnSaison.innerHTML =
+                                "Aucune bande annonce disponible" +
+                                " &#128556;")
+                          )
                       );
                   });
                 } //fin du for
@@ -582,7 +676,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     data.last_episode_to_air.episode_number;
                   description.innerHTML = data.overview;
                   btnSaisonDescription.innerHTML =
-                    "Générer aléatoirement une video en Anglais";
+                    "Générer aléatoirement une video en FR/EN";
 
                   div.appendChild(nomSerie);
                   div.appendChild(enCour);
@@ -599,7 +693,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                   btnSaisonBa.addEventListener("click", (e) => {
                     fetch(
-                      `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                      `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=fr`
                     )
                       .then((reponse) => reponse.json())
                       .then((data) => {
@@ -613,10 +707,27 @@ document.addEventListener("DOMContentLoaded", () => {
                           "https://www.youtube.com/watch?v=" +
                           `${data.results[random].key}`;
                       })
-                      .catch(
-                        (err) =>
-                          (lienBtnSaison.innerHTML =
-                            "Aucune bande annonce disponible")
+                      .catch((err) =>
+                        fetch(
+                          `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                        )
+                          .then((reponse) => reponse.json())
+                          .then((data) => {
+                            let random = getRandomInt(data.results.length);
+                            lienBtnSaisonDescription.innerHTML =
+                              "&#128073; " +
+                              `${data.results[random].name}` +
+                              " &#128072;";
+
+                            lienBtnSaisonDescription.href =
+                              "https://www.youtube.com/watch?v=" +
+                              `${data.results[random].key}`;
+                          })
+                          .catch(
+                            (err) =>
+                              (lienBtnSaison.innerHTML =
+                                "Aucune bande annonce disponible")
+                          )
                       );
                   });
 
@@ -632,7 +743,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     saisonNb = document.createElement("p");
                     saisonBouton = document.createElement("button"); //boutonBA
                     saisonBouton.setAttribute("class", `${e.target.id}`); //boutonBA
-                    saisonBouton.setAttribute("id", `${i}`); //boutonBA
+                    saisonBouton.setAttribute(
+                      "id",
+                      `${data.seasons[i].season_number}`
+                    ); //boutonBA
                     let lienBtnSaison = document.createElement("a");
 
                     saisonsName.innerHTML = data.seasons[i].name;
@@ -647,7 +761,7 @@ document.addEventListener("DOMContentLoaded", () => {
                       " Nbs d'épisodes : " +
                       data.seasons[i].episode_count;
                     saisonBouton.innerHTML =
-                      "Générer aléatoirement une Ba en FR";
+                      "Générer aléatoirement une Ba en FR/EN";
 
                     divSaison.appendChild(saisonsName);
                     divSaison.appendChild(imageSerie);
@@ -657,7 +771,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     divSaison.appendChild(lienBtnSaison);
                     grid.appendChild(divSaison);
 
-                    let btnSaisonBa = document.getElementById(`${i}`);
+                    let btnSaisonBa = document.getElementById(
+                      `${data.seasons[i].season_number}`
+                    );
 
                     btnSaisonBa.addEventListener("click", (event) => {
                       fetch(
@@ -681,10 +797,34 @@ document.addEventListener("DOMContentLoaded", () => {
                             "https://www.youtube.com/watch?v=" +
                             `${data.results[random].key}`;
                         })
-                        .catch(
-                          (err) =>
-                            (lienBtnSaison.innerHTML =
-                              "Aucune bande annonce disponible" + " &#128556;")
+                        .catch((err) =>
+                          fetch(
+                            `https://api.themoviedb.org/3/tv/${event.target.classList.value}/season/${event.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                          )
+                            .then((reponse) => reponse.json())
+                            .then((data) => {
+                              lienBtnSaison.setAttribute("target", "_blank");
+                              lienBtnSaison.setAttribute(
+                                "class",
+                                "lienBtnSaisonDescription"
+                              );
+                              let random = getRandomInt(data.results.length);
+
+                              lienBtnSaison.innerHTML =
+                                "&#128073; " +
+                                `${data.results[random].name}` +
+                                " &#128072;";
+
+                              lienBtnSaison.href =
+                                "https://www.youtube.com/watch?v=" +
+                                `${data.results[random].key}`;
+                            })
+                            .catch(
+                              (err) =>
+                                (lienBtnSaison.innerHTML =
+                                  "Aucune bande annonce disponible" +
+                                  " &#128556;")
+                            )
                         );
                     });
                   } //fin du for
@@ -800,7 +940,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   data.last_episode_to_air.episode_number;
                 description.innerHTML = data.overview;
                 btnSaisonDescription.innerHTML =
-                  "Générer aléatoirement une video en Anglais";
+                  "Générer aléatoirement une video en FR/EN";
 
                 div.appendChild(nomSerie);
                 div.appendChild(enCour);
@@ -817,7 +957,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 btnSaisonBa.addEventListener("click", (e) => {
                   fetch(
-                    `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                    `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=fr`
                   )
                     .then((reponse) => reponse.json())
                     .then((data) => {
@@ -831,10 +971,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         "https://www.youtube.com/watch?v=" +
                         `${data.results[random].key}`;
                     })
-                    .catch(
-                      (err) =>
-                        (lienBtnSaison.innerHTML =
-                          "Aucune bande annonce disponible")
+                    .catch((err) =>
+                      fetch(
+                        `https://api.themoviedb.org/3/tv/${e.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                      )
+                        .then((reponse) => reponse.json())
+                        .then((data) => {
+                          let random = getRandomInt(data.results.length);
+                          lienBtnSaisonDescription.innerHTML =
+                            "&#128073; " +
+                            `${data.results[random].name}` +
+                            " &#128072;";
+
+                          lienBtnSaisonDescription.href =
+                            "https://www.youtube.com/watch?v=" +
+                            `${data.results[random].key}`;
+                        })
+                        .catch(
+                          (err) =>
+                            (lienBtnSaison.innerHTML =
+                              "Aucune bande annonce disponible")
+                        )
                     );
                 });
 
@@ -850,7 +1007,10 @@ document.addEventListener("DOMContentLoaded", () => {
                   saisonNb = document.createElement("p");
                   saisonBouton = document.createElement("button"); //boutonBA
                   saisonBouton.setAttribute("class", `${e.target.id}`); //boutonBA
-                  saisonBouton.setAttribute("id", `${i}`); //boutonBA
+                  saisonBouton.setAttribute(
+                    "id",
+                    `${data.seasons[i].season_number}`
+                  ); //boutonBA
                   let lienBtnSaison = document.createElement("a");
 
                   saisonsName.innerHTML = data.seasons[i].name;
@@ -864,7 +1024,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     " / " +
                     " Nbs d'épisodes : " +
                     data.seasons[i].episode_count;
-                  saisonBouton.innerHTML = "Générer aléatoirement une Ba en FR";
+                  saisonBouton.innerHTML =
+                    "Générer aléatoirement une Ba en FR/EN";
 
                   divSaison.appendChild(saisonsName);
                   divSaison.appendChild(imageSerie);
@@ -874,7 +1035,9 @@ document.addEventListener("DOMContentLoaded", () => {
                   divSaison.appendChild(lienBtnSaison);
                   grid.appendChild(divSaison);
 
-                  let btnSaisonBa = document.getElementById(`${i}`);
+                  let btnSaisonBa = document.getElementById(
+                    `${data.seasons[i].season_number}`
+                  );
 
                   btnSaisonBa.addEventListener("click", (event) => {
                     fetch(
@@ -898,10 +1061,34 @@ document.addEventListener("DOMContentLoaded", () => {
                           "https://www.youtube.com/watch?v=" +
                           `${data.results[random].key}`;
                       })
-                      .catch(
-                        (err) =>
-                          (lienBtnSaison.innerHTML =
-                            "Aucune bande annonce disponible" + " &#128556;")
+                      .catch((err) =>
+                        fetch(
+                          `https://api.themoviedb.org/3/tv/${event.target.classList.value}/season/${event.target.id}/videos?api_key=3341d636ea5e718cbe535387f5416379&language=en-US`
+                        )
+                          .then((reponse) => reponse.json())
+                          .then((data) => {
+                            lienBtnSaison.setAttribute("target", "_blank");
+                            lienBtnSaison.setAttribute(
+                              "class",
+                              "lienBtnSaisonDescription"
+                            );
+                            let random = getRandomInt(data.results.length);
+
+                            lienBtnSaison.innerHTML =
+                              "&#128073; " +
+                              `${data.results[random].name}` +
+                              " &#128072;";
+
+                            lienBtnSaison.href =
+                              "https://www.youtube.com/watch?v=" +
+                              `${data.results[random].key}`;
+                          })
+                          .catch(
+                            (err) =>
+                              (lienBtnSaison.innerHTML =
+                                "Aucune bande annonce disponible" +
+                                " &#128556;")
+                          )
                       );
                   });
                 } //fin du for
